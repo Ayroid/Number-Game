@@ -50,12 +50,25 @@ public class NumberGame{
         }
         return false;
       }
+      public static boolean completionCheck(int arr[][]){
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr.length-1;j++){
+                if(i==3 && j==2){
+                    break;
+                }
+                if(arr[i][j]>arr[i][j+1]){
+                    return false;
+                }
+            }
+        }
+        return true;
+      }
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             int location[]=findZero(arr);
             int xzero=location[0];
             int yzero=location[1];
-            while(true){
+            while(completionCheck(arr)!=true){
                 System.out.print("\033[H\033[2J");
                 display(arr);
                 int x,y;
@@ -77,6 +90,9 @@ public class NumberGame{
                 xzero=x;
                 yzero=y;
             }
+            System.out.print("\033[H\033[2J");
+            display(arr);
+            System.out.println("CONGRATULATIONS, You've won the Game!");
         }
     }
 }
