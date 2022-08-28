@@ -98,7 +98,9 @@ public class NumberGame{
                             y=yzero;
                         }
                         else{
-                            System.out.println("Wrong Choice!");
+                            System.out.print("\033[H\033[2J");
+                            display(arr);
+                            System.out.print("Wrong Choice!😒\nPress W/S/A/D: ");
                             continue;
                         }
                         if(indexVerification(x, y, xzero, yzero)==true){
