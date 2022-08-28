@@ -99,6 +99,7 @@ public class NumberGame{
                         }
                         else{
                             System.out.println("Wrong Choice!");
+                            continue;
                         }
                         if(indexVerification(x, y, xzero, yzero)==true){
                             break;
