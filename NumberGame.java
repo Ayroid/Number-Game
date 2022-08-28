@@ -42,7 +42,7 @@ public class NumberGame{
         arr[xzero][yzero] = temp;
       }  
       public static boolean indexVerification(int x, int y, int xzero, int yzero){
-        if(xzero<0 || xzero>3 || yzero<0 || yzero>3){
+        if(x<0 || x>3 || y<0 || y>3){
             return false;
         }
         if((x==xzero-1 && y==yzero) || (x==xzero+1 && y==yzero) ||(x==xzero && y==yzero-1) ||(x==xzero && y==yzero+1)){
@@ -65,34 +65,60 @@ public class NumberGame{
       }
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            int location[]=findZero(arr);
-            int xzero=location[0];
-            int yzero=location[1];
-            while(completionCheck(arr)!=true){
+            System.out.print("\033[H\033[2J");
+            System.out.println("\t\t\t\t\t\t\t😁THE NUMBER GAME😁");
+            System.out.println("Your Objective is to sort the Elements of the 4x4 Matrix!");
+            System.out.println("Press:\nS - Start🥳\nQ - Quit😒");
+            char play=sc.next().charAt(0);
+            if(play=='S' || play=='s'){
+                int location[]=findZero(arr);
+                int xzero=location[0];
+                int yzero=location[1];
+                while(completionCheck(arr)!=true){
+                    System.out.print("\033[H\033[2J");
+                    display(arr);
+                    int x=xzero,y=yzero;
+                    System.out.print("Press W/S/A/D: ");
+                    do{
+                        char ch=sc.next().charAt(0);
+                        if(ch=='a' || ch=='A'){
+                            x=xzero;
+                            y=yzero+1;
+                        }
+                        else if(ch=='d' || ch=='D'){
+                            x=xzero;
+                            y=yzero-1;
+                        }
+                        else if(ch=='w' || ch=='W'){
+                            x=xzero+1;
+                            y=yzero;
+                        }
+                        else if(ch=='s' || ch=='S'){
+                            x=xzero-1;
+                            y=yzero;
+                        }
+                        else{
+                            System.out.println("Wrong Choice!");
+                        }
+                        if(indexVerification(x, y, xzero, yzero)==true){
+                            break;
+                        }
+                        else{
+                            System.out.print("\033[H\033[2J");
+                            display(arr);
+                            System.out.print("Wrong Choice!😒\nPress W/S/A/D: ");
+                            
+                        }
+                    }while(true);
+                    swap(x, y, xzero, yzero);
+                    xzero=x;
+                    yzero=y;
+                }
                 System.out.print("\033[H\033[2J");
                 display(arr);
-                int x,y;
-                System.out.print("Enter Index of the Element to replace with zero: ");
-                do{
-                    x=sc.nextInt();
-                    y=sc.nextInt();
-                    if(indexVerification(x, y, xzero, yzero)==true){
-                        break;
-                    }
-                    else{
-                        System.out.print("\033[H\033[2J");
-                        display(arr);
-                        System.out.print("Element cannot be swapped!\nEnter Index: ");
-                        
-                    }
-                }while(true);
-                swap(x, y, xzero, yzero);
-                xzero=x;
-                yzero=y;
+                System.out.println("CONGRATULATIONS🥳, You've won the Game!");
             }
-            System.out.print("\033[H\033[2J");
-            display(arr);
-            System.out.println("CONGRATULATIONS, You've won the Game!");
-        }
+            System.out.println("Have a GOOD DAY!😁");
+        }   
     }
 }
