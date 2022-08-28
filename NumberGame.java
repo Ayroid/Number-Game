@@ -1,16 +1,14 @@
 import java.util.*;
 public class NumberGame{
+    static int arr[][] = uniqueRandom();
     public static int[][] uniqueRandom() {
         Random rand = new Random();
         int[][] nums = new int[4][4];
-        //from  w w  w  .  j  a v a 2s.c  o  m
         boolean[] check = new boolean[16];
         
         for (int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++){
                 int rnd = rand.nextInt(16);
-                //check if the check array index has been set
-                //if set regenerate 
                 while (check[rnd]) {
                     rnd = rand.nextInt(16);
                 }
@@ -38,15 +36,47 @@ public class NumberGame{
         }
         return new int[] {-1,-1};
       }
+      public static void swap(int x, int y, int xzero, int yzero){
+        int temp = arr[x][y];
+        arr[x][y] = arr[xzero][yzero];
+        arr[xzero][yzero] = temp;
+      }  
+      public static boolean indexVerification(int x, int y, int xzero, int yzero){
+        if(xzero<0 || xzero>3 || yzero<0 || yzero>3){
+            return false;
+        }
+        if((x==xzero-1 && y==yzero) || (x==xzero+1 && y==yzero) ||(x==xzero && y==yzero-1) ||(x==xzero && y==yzero+1)){
+            return true;
+        }
+        return false;
+      }
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int arr[][] = uniqueRandom();
-        while(true){
-            display(arr);
-            System.out.print("Enter Index of the Element to replace with zero: ");
-            int x,y;
-            x=sc.nextInt();
-            y=sc.nextInt();
+        try (Scanner sc = new Scanner(System.in)) {
+            int location[]=findZero(arr);
+            int xzero=location[0];
+            int yzero=location[1];
+            while(true){
+                System.out.print("\033[H\033[2J");
+                display(arr);
+                int x,y;
+                System.out.print("Enter Index of the Element to replace with zero: ");
+                do{
+                    x=sc.nextInt();
+                    y=sc.nextInt();
+                    if(indexVerification(x, y, xzero, yzero)==true){
+                        break;
+                    }
+                    else{
+                        System.out.print("\033[H\033[2J");
+                        display(arr);
+                        System.out.print("Element cannot be swapped!\nEnter Index: ");
+                        
+                    }
+                }while(true);
+                swap(x, y, xzero, yzero);
+                xzero=x;
+                yzero=y;
+            }
         }
     }
 }
