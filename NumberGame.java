@@ -56,7 +56,7 @@ public class NumberGame{
                 if(i==3 && j==2){
                     break;
                 }
-                if(arr[i][j]>arr[i][j+1]){
+                if(arr[i][j]!=arr[i][j+1]-1){
                     return false;
                 }
             }
@@ -66,9 +66,9 @@ public class NumberGame{
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.print("\033[H\033[2J");
-            System.out.println("\t\t\t\t\t\t\t😁THE NUMBER GAME😁");
+            System.out.println("\t\t\t\t\t\t\tTHE NUMBER GAME");
             System.out.println("Your Objective is to sort the Elements of the 4x4 Matrix!");
-            System.out.println("Press:\nS - Start🥳\nQ - Quit😒");
+            System.out.println("Press:\nS - Start\nQ - Quit");
             char play=sc.next().charAt(0);
             if(play=='S' || play=='s'){
                 int location[]=findZero(arr);
@@ -100,7 +100,7 @@ public class NumberGame{
                         else{
                             System.out.print("\033[H\033[2J");
                             display(arr);
-                            System.out.print("Wrong Choice!😒\nPress W/S/A/D: ");
+                            System.out.print("Wrong Choice!\nPress W/S/A/D: ");
                             continue;
                         }
                         if(indexVerification(x, y, xzero, yzero)==true){
@@ -109,7 +109,7 @@ public class NumberGame{
                         else{
                             System.out.print("\033[H\033[2J");
                             display(arr);
-                            System.out.print("Wrong Choice!😒\nPress W/S/A/D: ");
+                            System.out.print("Wrong Choice!\nPress W/S/A/D: ");
                             
                         }
                     }while(true);
@@ -119,9 +119,9 @@ public class NumberGame{
                 }
                 System.out.print("\033[H\033[2J");
                 display(arr);
-                System.out.println("CONGRATULATIONS🥳, You've won the Game!");
+                System.out.println("CONGRATULATIONS, You've won the Game!");
             }
-            System.out.println("Have a GOOD DAY!😁");
+            System.out.println("Have a GOOD DAY!");
         }   
     }
 }
